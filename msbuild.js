@@ -133,7 +133,11 @@ msbuild.prototype.getMSBuildPath = function(os,processor,version){
 		BuildTools: 'BuildTools'
 	};
 	
-	programFilesDir = process.env['programfiles(x86)'] || process.env.PROGRAMFILES;
+	if (parseFloat(version) >= 17.0)
+		programFilesDir = process.env.PROGRAMFILES;
+	else
+		programFilesDir = process.env['programfiles(x86)'] || process.env.PROGRAMFILES;
+
 	console.log('Found "programFiles" dir = ' + programFilesDir);
 
 	// For the msbuild 15+ versions, use the appropriate VS2017, VS2019 & VS2022 directories
